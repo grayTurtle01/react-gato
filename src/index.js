@@ -6,7 +6,7 @@ function Square(props){
 
     return (
       <button className="square"
-              onClick={ () => props.onClick() }>
+              onClick={ props.onClick }>
 
         {props.value}
 
@@ -22,16 +22,21 @@ class Board extends React.Component {
     super(props);
 
     this.state = {
-      squares : Array(9).fill(null)
+      squares : Array(9).fill(null),
+      xIsNext: false
     } 
   }
 
   handleClick(i){
     const squares = this.state.squares.slice()
 
-    squares[i] = 'X'
+    squares[i] = this.state.xIsNext? 'X' : 'O'
 
-    this.setState({squares: squares})
+    this.setState({
+      squares: squares,
+      xIsNext : !this.state.xIsNext
+
+    })
 
   }
 
