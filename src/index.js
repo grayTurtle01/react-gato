@@ -30,6 +30,16 @@ class Board extends React.Component {
   handleClick(i){
     const squares = this.state.squares.slice()
 
+    // Ignoring clicks for clicked squares
+    if( squares[i] != null){
+      return;
+    }
+
+    // Block the board if there is a winner
+    if( calculateWinner(squares) ){
+      return; 
+    }
+
     squares[i] = this.state.xIsNext? 'X' : 'O'
 
     this.setState({
