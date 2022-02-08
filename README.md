@@ -2,4 +2,5 @@
 A Tic-Tac-Toc game with Time-Travel 
 
 ## ScreenShoot 📸
-![Gato]('images/screenShoot.png')
+![Gato](images/screenShoot.png)
+
