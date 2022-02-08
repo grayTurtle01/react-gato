@@ -6,13 +6,13 @@ function Square(props){
 
     return (
       <button className="square"
-              onClick={ props.onClick }>
+              onClick={ props.handleClick }>
 
         {props.value}
 
       </button>
     );
-  }
+}
 
 
 class Board extends React.Component {
@@ -31,7 +31,7 @@ class Board extends React.Component {
     const squares = this.state.squares.slice()
 
     // Ignoring clicks for clicked squares
-    if( squares[i] != null){
+    if( squares[i] != null ){
       return;
     }
 
@@ -52,7 +52,7 @@ class Board extends React.Component {
 
   renderSquare(i) {
     return <Square value={ this.state.squares[i] }
-                   onClick={ ()=> this.handleClick(i) }
+                   handleClick={ ()=> this.handleClick(i) }
                    />;
   }
 
@@ -62,7 +62,7 @@ class Board extends React.Component {
     let winner = calculateWinner(this.state.squares)
 
     if ( winner ){
-      status = "The winner is " + winner
+      status = "The winner is: " + winner
     }
     else{
       status = 'Next player: ' + (this.state.xIsNext? 'X' : 'O');
