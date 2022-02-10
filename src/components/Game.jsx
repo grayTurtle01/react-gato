@@ -1,33 +1,21 @@
-import React from 'react'
+import {useState} from 'react'
 
 import Board from './Board'
 
-class Game extends React.Component {
+function Game(props){
 
-    constructor(){
-      super()
-  
-      this.state = {
-        
-        history : [  
-            { squares: Array(9).fill(null) }
-        ],
-  
-        xIsNext : true,
-  
-        moveNumber : 0,
-        
-        indexs : []
-
-      }
-  
-    }
-  
-    handleClick = (i)=> {
+    // Initial state
+    const [history, setHistory] = useState( [ {squares: Array(9).fill(null)} ] )
+    const [xIsNext, tooglePlayer] = useState(true)
+    const [moveNumber, setMove] = useState(0)
 
 
-      const history = this.state.history.slice(0, this.state.moveNumber + 1)
-      const current = history[history.length - 1]
+    // Functions 
+    function handleClick(i){
+
+
+      const current_history = history.slice(0, moveNumber + 1)
+      const current = current_history[ current_history.length - 1 ]
   
       const squares = current.squares.slice()
   
@@ -41,77 +29,79 @@ class Game extends React.Component {
         return; 
       }
   
-      squares[i] = this.state.xIsNext? 'X' : 'O'
+      // Fill empty square
+      squares[i] = xIsNext? 'X' : 'O'
 
-      // Save square Indexs
-      const newIndexs = [...this.state.indexs]
-      newIndexs.push(i)
   
-      this.setState({
-        history: history.concat([ {squares: squares} ]),
-        xIsNext : !this.state.xIsNext,
-        moveNumber : history.length,
-        indexs: newIndexs
-        
-      })
+      // Update histoy
+      const updated_history = current_history.concat( [{squares: squares}])
+      setHistory(updated_history )
+
+      // Toogle Player
+      tooglePlayer( !xIsNext )
+
+      // Update moveNumber
+      setMove( current_history.length)
   
     }
   
-    jumpTo = (move)=>{
-      this.setState({
-        moveNumber : move,
-        xIsNext: (move % 2) === 0
-      })
+    function jumpTo(move){
+
+      // update moveNumber
+      setMove( move )
+
+      // Check which is the next player
+      tooglePlayer( (move % 2) === 0 ) 
+
     }
   
-  
-    render() {
-      const history = this.state.history
-      const current = history[this.state.moveNumber]
-  
-      let status;
-  
-      let winner = calculateWinner(current.squares)
-  
-      if ( winner ){
+    // Variables
+    const current = history[moveNumber]
+
+    let status;
+
+    let winner = calculateWinner(current.squares)
+
+    if ( winner ){
         status = "The winner is: " + winner
-      }
-      else{
-        status = 'Next player: ' + (this.state.xIsNext? 'X' : 'O');
-      }
-  
-      //  Buttons moves
-      const moves = history.map( (step, move) => {
-  
-        let description = (move === 0 ? 'Go to game start':
-                                        'Go to move ' + move )
-        return( 
-          <li key={move}>
-            <button onClick={ ()=> this.jumpTo(move) }>
-                {description}
-            </button>
-          </li>
-        )
-      })
-  
-  
-      return (
-        <div className="game">
-  
-          <div className="game-board">
-            <Board squares={current.squares}
-                   handleClick={ this.handleClick } />
-          </div>
-  
-          <div className="game-info">
-            <div>{ status }</div>
-            <ol>{ moves }</ol>
-          </div>
-  
-  
-        </div>
-      );
     }
+    else{
+        status = 'Next player: ' + (xIsNext? 'X' : 'O');
+    }
+
+    //  Buttons moves
+    const moves = history.map( (step, move) => {
+
+    let description = (move === 0 ? 'Go to game start':
+                                    'Go to move ' + move )
+    return( 
+        <li key={move}>
+        <button onClick={ ()=> jumpTo(move) }>
+            {description}
+        </button>
+        </li>
+    )
+    })
+
+  
+    // Return Component
+    return (
+         <div className="game">
+
+            <div className="game-board">
+                <Board squares={current.squares}
+                        handleClick={ handleClick } />
+            </div>
+
+            <div className="game-info">
+                <div>{ status }</div>
+                <ol>{ moves }</ol>
+            </div>
+
+
+        </div>
+    );
+    
 }
   
 export default Game;  
