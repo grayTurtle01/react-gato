@@ -9,23 +9,29 @@ class Game extends React.Component {
   
       this.state = {
         
-        history : [  { squares: Array(9).fill(null) } ],
+        history : [  
+            { squares: Array(9).fill(null) }
+        ],
   
         xIsNext : true,
   
-        moveNumber : 0
+        moveNumber : 0,
         
+        indexs : []
+
       }
   
     }
   
     handleClick = (i)=> {
+
+
       const history = this.state.history.slice(0, this.state.moveNumber + 1)
       const current = history[history.length - 1]
   
       const squares = current.squares.slice()
   
-      // Ignoring clicks for clicked squares
+      // Ignoring clicks for filled squares
       if( squares[i] != null ){
         return;
       }
@@ -36,12 +42,17 @@ class Game extends React.Component {
       }
   
       squares[i] = this.state.xIsNext? 'X' : 'O'
+
+      // Save square Indexs
+      const newIndexs = [...this.state.indexs]
+      newIndexs.push(i)
   
       this.setState({
         history: history.concat([ {squares: squares} ]),
         xIsNext : !this.state.xIsNext,
-        moveNumber : history.length
-  
+        moveNumber : history.length,
+        indexs: newIndexs
+        
       })
   
     }
@@ -69,10 +80,11 @@ class Game extends React.Component {
         status = 'Next player: ' + (this.state.xIsNext? 'X' : 'O');
       }
   
+      //  Buttons moves
       const moves = history.map( (step, move) => {
   
-        let description = move === 0 ? 'Go to game start':
-                                      'Go to move ' + move 
+        let description = (move === 0 ? 'Go to game start':
+                                        'Go to move ' + move )
         return( 
           <li key={move}>
             <button onClick={ ()=> this.jumpTo(move) }>
