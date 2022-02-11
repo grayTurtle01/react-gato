@@ -13,4 +13,5 @@ A Tic-Tac-Toc game with Time-Travel
 
 ## Challenges:
 - [x] Display the location of each move
-- [x] Bold the currently select item in the move lists   
+- [x] Bold the currently select item in the move lists
+- [x] Rewrite the board to use two loops to make the squares instead of hardcoding them.   
