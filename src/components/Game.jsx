@@ -1,3 +1,4 @@
+
 import {useState} from 'react'
 
 import Board from './Board'
@@ -13,6 +14,7 @@ function Game(props){
     const [xIsNext, tooglePlayer] = useState(true)
     const [moveNumber, setMove] = useState(0)
     const [isAscendig, toggleOrder] = useState(true)
+    const [winner_indices, setWinnerIndices] = useState([])
 
 
     ///// Functions 
@@ -80,7 +82,18 @@ function Game(props){
 
     let status;
 
-    let winner = calculateWinner(current.squares)
+    let results = calculateWinner(current.squares)
+
+    let winner = null
+
+    if( results == null)
+      winner = null
+    else{
+      winner = results[0][0]
+      let winner_indices = results[1]
+      //setWinnerIndices(winner_indices)
+
+    }
 
     if ( winner ){
         status = "The winner is: " + winner
@@ -118,7 +131,8 @@ function Game(props){
 
             <div className="game-board">
                 <Board squares={current.squares}
-                        handleClick={ handleClick } />
+                        handleClick={ handleClick } 
+                        winner_indices={winner_indices}/>
             </div>
 
             <div className="game-info">
@@ -153,7 +167,10 @@ function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+        
+        let winner = squares[a]
+        let winner_indices = [a, b, c]
+        return [winner , winner_indices ];
       }
     }
     return null;
