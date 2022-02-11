@@ -67,6 +67,7 @@ function Game(props){
       // Check which is the next player
       tooglePlayer( (move % 2) === 0 ) 
 
+
     }
   
     // Variables
