@@ -5,7 +5,11 @@ import Board from './Board'
 function Game(props){
 
     // Initial state
-    const [history, setHistory] = useState( [ {squares: Array(9).fill(null)} ] )
+    const [history, setHistory] = useState( [ { 
+                                                squares: Array(9).fill(null),
+                                                indexs: []
+                                              } ] )
+
     const [xIsNext, tooglePlayer] = useState(true)
     const [moveNumber, setMove] = useState(0)
 
@@ -17,7 +21,10 @@ function Game(props){
       const current_history = history.slice(0, moveNumber + 1)
       const current = current_history[ current_history.length - 1 ]
   
+      // make copyes of the arrays
       const squares = current.squares.slice()
+      const indexs = current.indexs.slice()
+      
   
       // Ignoring clicks for filled squares
       if( squares[i] != null ){
@@ -32,9 +39,16 @@ function Game(props){
       // Fill empty square
       squares[i] = xIsNext? 'X' : 'O'
 
+      // Save the square index
+      indexs.push(i)
+
   
       // Update histoy
-      const updated_history = current_history.concat( [{squares: squares}])
+      const updated_history = current_history.concat( [
+                                                         {squares: squares,
+                                                          indexs: indexs}
+                                                      ])
+
       setHistory(updated_history )
 
       // Toogle Player
@@ -69,18 +83,21 @@ function Game(props){
         status = 'Next player: ' + (xIsNext? 'X' : 'O');
     }
 
-    //  Buttons moves
+    //  Buttons messages
     const moves = history.map( (step, move) => {
 
-    let description = (move === 0 ? 'Go to game start':
-                                    'Go to move ' + move )
-    return( 
-        <li key={move}>
-        <button onClick={ ()=> jumpTo(move) }>
-            {description}
-        </button>
-        </li>
-    )
+          let board_index = step.indexs[move-1]
+          let [x,y] = boardIndex_to_coords(board_index)
+
+          let description = (move === 0 ? 'Go to game start':
+                                           `Go to move  ${move}  |  ( ${x},${y} )` )
+            return( 
+                <li key={move}>
+                    <button onClick={ ()=> jumpTo(move) }>
+                        {description}
+                    </button>
+                </li>
+            )
     })
 
   
@@ -124,4 +141,19 @@ function calculateWinner(squares) {
       }
     }
     return null;
+}
+
+function boardIndex_to_coords(boardIndex){
+  const rows = 3
+  const columns = 3
+  
+
+  let x = boardIndex % columns
+  let y = parseInt(boardIndex / rows)
+
+  x++
+  y++
+
+  return [x,y]
+
 }
