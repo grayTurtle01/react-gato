@@ -12,6 +12,7 @@ A Tic-Tac-Toc game with Time-Travel
 - Allow players to review game's history
 
 ## Challenges:
-- [x] Display the location of each move
-- [x] Bold the currently select item in the move lists
-- [x] Rewrite the board to use two loops to make the squares instead of hardcoding them.   
+- [x] 1. Display the location of each move
+- [x] 2. Bold the currently select item in the move lists
+- [x] 3. Rewrite the board to use two loops to make the squares instead of hardcoding them.   
+- [x] 4. Add a toggle button that let you sort the moves in either ascending or descenging order

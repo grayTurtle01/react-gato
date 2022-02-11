@@ -12,9 +12,10 @@ function Game(props){
 
     const [xIsNext, tooglePlayer] = useState(true)
     const [moveNumber, setMove] = useState(0)
+    const [isAscendig, toggleOrder] = useState(true)
 
 
-    // Functions 
+    ///// Functions 
     function handleClick(i){
 
 
@@ -70,7 +71,11 @@ function Game(props){
 
     }
   
-    // Variables
+    function handleToggle(){
+      toggleOrder( !isAscendig )
+    }
+
+    //// Variables
     const current = history[moveNumber]
 
     let status;
@@ -91,7 +96,7 @@ function Game(props){
           let [x,y] = boardIndex_to_coords(board_index)
 
           let description = (move === 0 ? 'Go to game start':
-                                           `Go to move  ${move}  |  ( ${x},${y} )` )
+                                          `Go to move  ${move}  |  ( ${x},${y} )` )
             return( 
                 <li key={move}>
                     <button onClick={ ()=> jumpTo(move) }
@@ -101,6 +106,10 @@ function Game(props){
                 </li>
             )
     })
+
+    // Select button order
+    if( isAscendig === false)
+       moves.reverse()
 
   
     // Return Component
@@ -114,6 +123,11 @@ function Game(props){
 
             <div className="game-info">
                 <div>{ status }</div>
+
+                <button onClick={ handleToggle }>
+                  { isAscendig ? 'Ascending': 'Descending'}
+                </button>
+
                 <ol>{ moves }</ol>
             </div>
 
