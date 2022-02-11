@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-gato/static/css/main.ce1124db.css",
-    "main.js": "/react-gato/static/js/main.4b78a8c1.js",
+    "main.css": "/react-gato/static/css/main.f5fe90e3.css",
+    "main.js": "/react-gato/static/js/main.35f07a1c.js",
     "index.html": "/react-gato/index.html",
-    "main.ce1124db.css.map": "/react-gato/static/css/main.ce1124db.css.map",
-    "main.4b78a8c1.js.map": "/react-gato/static/js/main.4b78a8c1.js.map"
+    "main.f5fe90e3.css.map": "/react-gato/static/css/main.f5fe90e3.css.map",
+    "main.35f07a1c.js.map": "/react-gato/static/js/main.35f07a1c.js.map"
   },
   "entrypoints": [
-    "static/css/main.ce1124db.css",
-    "static/js/main.4b78a8c1.js"
+    "static/css/main.f5fe90e3.css",
+    "static/js/main.35f07a1c.js"
   ]
 }
