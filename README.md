@@ -12,5 +12,5 @@ A Tic-Tac-Toc game with Time-Travel
 - Allow players to review game's history
 
 ## Challenges:
-- [ ] Display the location of each move
+- [x] Display the location of each move
 - [ ] Bold the currently select item in the move lists   
