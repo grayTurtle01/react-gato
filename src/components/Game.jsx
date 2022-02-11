@@ -94,7 +94,8 @@ function Game(props){
                                            `Go to move  ${move}  |  ( ${x},${y} )` )
             return( 
                 <li key={move}>
-                    <button onClick={ ()=> jumpTo(move) }>
+                    <button onClick={ ()=> jumpTo(move) }
+                            style={ {color:  move==moveNumber? 'blue' : 'black'} }>
                         {description}
                     </button>
                 </li>
