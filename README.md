@@ -5,7 +5,7 @@ A Tic-Tac-Toc game with Time-Travel
 ![Gato](images/screenShoot.png)
 
 
-## Features:
+## Features: 🧰
 - Lets you play tic-tac-toe
 - Indicates when a player has won the game
 - Store game's history as a game progess
