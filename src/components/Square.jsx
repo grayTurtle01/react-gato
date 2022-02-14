@@ -1,5 +1,7 @@
 
-function Square({handleClick, value, winner_indices, board_index}){
+function Square(props){
+  // Destructuring the props
+   const {handleClick, value, winner_indices, board_index} = props 
 
     return (
       <button className="square"
