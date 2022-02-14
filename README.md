@@ -18,3 +18,6 @@ A Tic-Tac-Toc game with Time-Travel
 - [x] 4. Add a toggle button that let you sort the moves in either ascending or descenging order
 - [x] 5. When someone win, highlight the three squares that caused the win.
 - [x] 6. When someone no wins, display a message about the result being a draw.
+
+## Final ScreenShoot
+![final](images/final-screen-shoot.png)
