@@ -99,12 +99,19 @@ function Game(props){
 
     }
 
-    if ( winner ){
+    // Handle Draw Sitution
+    if( moveNumber == 9 && winner_indices.length == 0){
+      status = "¡¡ DRAW !!"
+    }
+    else if ( winner ){
         status = "The winner is: " + winner
     }
     else{
         status = 'Next player: ' + (xIsNext? 'X' : 'O');
     }
+
+
+
 
     //  Buttons messages
     const moves = history.map( (step, move) => {
