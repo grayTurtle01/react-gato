@@ -73,10 +73,7 @@ function Game(props){
 
     }
   
-    function handleToggle(){
-      toggleOrder( !isAscendig )
-    }
-
+  
     //// Variables
     const current = history[moveNumber]
 
@@ -113,7 +110,7 @@ function Game(props){
             return( 
                 <li key={move}>
                     <button onClick={ ()=> jumpTo(move) }
-                            style={ {color:  move==moveNumber? 'blue' : 'black'} }>
+                            style={ {color:  move===moveNumber? 'blue' : 'black'} }>
                         {description}
                     </button>
                 </li>
@@ -121,8 +118,9 @@ function Game(props){
     })
 
     // Select button order
-    if( isAscendig === false)
-       moves.reverse()
+    if( isAscendig === false){
+      moves.reverse()
+    }
 
   
     // Return Component
@@ -138,7 +136,7 @@ function Game(props){
             <div className="game-info">
                 <div>{ status }</div>
 
-                <button onClick={ handleToggle }>
+                <button onClick={ ()=> toggleOrder(!isAscendig) }>
                   { isAscendig ? 'Ascending': 'Descending'}
                 </button>
 
