@@ -19,7 +19,9 @@ function Board(props) {
           
           let square = <Square value={props.squares[board_index]} 
                                handleClick={ ()=> props.handleClick(board_index)}
-                               key={board_index} 
+                               key={board_index}
+                               winner_indices={props.winner_indices}
+                               board_index={board_index} 
           />
           
           row_squares.push(square)

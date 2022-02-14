@@ -1,11 +1,13 @@
 
-function Square(props){
+function Square({handleClick, value, winner_indices, board_index}){
 
     return (
       <button className="square"
-              onClick={ props.handleClick }>
+              onClick={ handleClick }
+              style={ { 'color': winner_indices.indexOf(board_index) !== -1?  'red': 'black'  } }
+              >
 
-        {props.value}
+        {value}
 
       </button>
     );

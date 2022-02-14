@@ -64,6 +64,9 @@ function Game(props){
   
     function jumpTo(move){
 
+      // reset winnerIndices
+      setWinnerIndices([])
+
       // update moveNumber
       setMove( move )
 
@@ -79,16 +82,20 @@ function Game(props){
 
     let status;
 
-    let results = calculateWinner(current.squares)
+    const results = calculateWinner(current.squares)
 
     let winner = null
 
-    if( results == null)
+    if( results == null){
       winner = null
+    }
     else{
       winner = results[0][0]
-      let winner_indices = results[1]
-      //setWinnerIndices(winner_indices)
+      let winner_line = results[1]
+
+      if(winner_indices.length == 0 ){
+        setWinnerIndices(winner_line)
+      }  
 
     }
 
