@@ -1,7 +1,8 @@
-
 import {useState} from 'react'
 
 import Board from './Board'
+
+import './Game.css'
 
 function Game(props){
 
@@ -93,14 +94,14 @@ function Game(props){
       winner = results[0][0]
       let winner_line = results[1]
 
-      if(winner_indices.length == 0 ){
+      if(winner_indices.length === 0 ){
         setWinnerIndices(winner_line)
       }  
 
     }
 
     // Handle Draw Sitution
-    if( moveNumber == 9 && winner_indices.length == 0){
+    if( moveNumber === 9 && winner_indices.length === 0){
       status = "¡¡ DRAW !!"
     }
     else if ( winner ){
@@ -124,7 +125,9 @@ function Game(props){
             return( 
                 <li key={move}>
                     <button onClick={ ()=> jumpTo(move) }
-                            style={ {color:  move===moveNumber? 'blue' : 'black'} }>
+                            className={ move===moveNumber? 'currentMove': '' } 
+                            >
+                              
                         {description}
                     </button>
                 </li>
@@ -148,6 +151,7 @@ function Game(props){
             </div>
 
             <div className="game-info">
+
                 <div>{ status }</div>
 
                 <button onClick={ ()=> toggleOrder(!isAscendig) }>
